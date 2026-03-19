@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get "/restaurants/:id/menu_items", to: "menu_items#index"
-  post "/restaurants/:id/menu_items", to: "menu_items#create"
+  get "/restaurants/:id/menu_items", to: "menu_items#index", as: "restaurant_menu_items"
+  post "/restaurants/:id/menu_items", to: "menu_items#create", as: "restaurant_menu_items_create"
   resources :restaurants
   resources :menu_items, only: [ :show, :update, :destroy ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
