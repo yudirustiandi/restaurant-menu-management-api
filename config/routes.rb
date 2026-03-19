@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get "/restaurants/:id/menu_items", to: "menu_items#index"
+  post "/restaurants/:id/menu_items", to: "menu_items#create"
+  resources :restaurants
+  resources :menu_items, only: [ :show, :update, :destroy ]
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
