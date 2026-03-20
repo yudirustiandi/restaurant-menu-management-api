@@ -11,5 +11,7 @@ module ActiveSupport
     fixtures :all
 
     # Add more helper methods to be used by all tests here...
+
+    Dir[Rails.root.join("test/helpers/**/*.rb")].sort.each { |file| require file }
   end
 end

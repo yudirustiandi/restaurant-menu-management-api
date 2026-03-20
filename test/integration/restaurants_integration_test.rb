@@ -1,17 +1,20 @@
 require "test_helper"
 
 class RestaurantsIntegrationTest < ActionDispatch::IntegrationTest
+  include AuthHelper
+
   setup do
     @restaurant = restaurants(:one)
+    @user = users(:one)
   end
 
   test "should get index" do
-    get restaurants_url
+    get restaurants_url, headers: auth_headers(@user)
     assert_response :success
   end
 
   test "should show restaurant" do
-    get restaurant_url(@restaurant)
+    get restaurant_url(@restaurant), headers: auth_headers(@user)
     assert_response :success
   end
 
@@ -24,7 +27,7 @@ class RestaurantsIntegrationTest < ActionDispatch::IntegrationTest
           phone: "08123456789",
           opening_hours: "08:00 - 22:00"
         }
-      }
+      }, headers: auth_headers(@user)
     end
 
     assert_response :created
@@ -33,7 +36,7 @@ class RestaurantsIntegrationTest < ActionDispatch::IntegrationTest
   test "should update restaurant" do
     patch restaurant_url(@restaurant), params: {
       restaurant: { name: "Updated Name" }
-    }
+    }, headers: auth_headers(@user)
 
     assert_response :success
     @restaurant.reload
@@ -43,7 +46,7 @@ class RestaurantsIntegrationTest < ActionDispatch::IntegrationTest
   test "should destroy restaurant" do
     @restaurant.menu_items.destroy_all
     assert_difference("Restaurant.count", -1) do
-      delete restaurant_url(@restaurant)
+      delete restaurant_url(@restaurant), headers: auth_headers(@user)
     end
 
     assert_response :success
