@@ -1,4 +1,8 @@
 class ApplicationController < ActionController::API
+  include Auth
+
+  attr_reader :current_user
+
   rescue_from ActiveRecord::RecordNotFound, with: :handle_not_found
   rescue_from ActiveRecord::RecordInvalid, with: :handle_record_invalid
 
