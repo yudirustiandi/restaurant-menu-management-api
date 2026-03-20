@@ -55,6 +55,8 @@ test:
 # for a full overview on how database connection configuration can be specified.
 #
 production:
+  url: <%= ENV["PROD_DATABASE_URL"] %>
+production:
   primary: &primary_production
     <<: *default
     database: restaurant_menu_management_production
