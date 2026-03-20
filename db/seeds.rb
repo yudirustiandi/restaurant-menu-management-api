@@ -10,6 +10,14 @@
 
 puts "Seeding..."
 
+username = ENV.fetch("USER_NAME", "admin")
+password = ENV.fetch("USER_PASS", "Admin123!!")
+
+User.find_or_create_by!(name: username) do |u|
+  u.password = password
+  u.password_confirmation = password
+end
+
 warung = Restaurant.find_or_create_by!(name: "Warung Nusantara") do |r|
   r.address = "Jakarta"
   r.phone = "081234567890"
