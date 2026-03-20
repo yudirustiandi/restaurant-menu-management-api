@@ -52,3 +52,7 @@ end
 gem "dotenv-rails", "~> 3.2"
 
 gem "kaminari", "~> 1.2"
+
+gem "jwt", "~> 3.1"
+
+gem "bcrypt", "~> 3.1"
