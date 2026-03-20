@@ -1,0 +1,25 @@
+services:
+  restaurant-menu-management-db:
+    image: mysql
+    container_name: restaurant-menu-management-db
+    env_file: ./.env
+    environment:
+      MYSQL_ROOT_PASSWORD: ${DB_PASS}
+      MYSQL_DATABASE: restaurant_menu_management_db
+      MYSQL_ALLOW_EMPTY_PASSWORD:
+      MYSQL_RANDOM_ROOT_PASSWORD:
+      MYSQL_PASSWORD: ${DB_PASS}
+    ports:
+      - ${DB_PORT}:3306
+    volumes:
+      - mysql_data:/var/lib/mysql
+    networks:
+      - restaurant_menu_management_network
+
+volumes:
+  mysql_data:
+
+
+networks:
+  restaurant_menu_management_network:
+    external: true

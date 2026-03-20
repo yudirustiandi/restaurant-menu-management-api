@@ -1,0 +1,27 @@
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    container_name: restaurant-menu-management-api
+    env_file: ./.env
+    volumes:
+      - .:/rails
+      - bundle_data:/usr/local/bundle
+    ports:
+      - "3000:3000"
+    environment:
+      DB_HOST: restaurant-menu-management-db
+      DB_USER: ${DB_USER}
+      DB_PASS: ${DB_PASS}
+      DB_NAME: ${DB_NAME}
+    networks:
+      - restaurant_menu_management_network
+
+volumes:
+  bundle_data:
+
+
+networks:
+  restaurant_menu_management_network:
+    external: true
